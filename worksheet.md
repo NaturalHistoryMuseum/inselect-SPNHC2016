@@ -70,15 +70,23 @@ as details of metadata that you wish to capture
 Natural history collections are vast and varied, providing quite a few challenges
 when digitising them.
 
-E.g. at the Natural History Museum there are an estimated 33 million insect
-specimens, housed in 130 thousand drawers
+At the Natural History Museum, London, there are an estimated 33 million insect
+specimens, housed in 130 thousand drawers:
 
-Whole-drawer imaging
+![Drawers of pinned beetles at Natural History Museum, London](images/pinned_fisheye.jpg)
 
-Challenge is to efficiently get an image of each object along with associated
-metadata.
+## Whole-drawer imaging
+* It is a lot easier and quicker to image 130 thousand drawers rather than 33
+million individual insects
+* By themselves, drawer-level images aren't very useful
+* Manually cropping each image takes too much time and without unique
+identifiers the individual images are of questionable value
 
-Inselect aims tosolve some of the problems associated with whole-drawer imaging
+**The challenge is to efficiently get a single image of each object along with
+its associated metadata.**
+
+## How Inselect can help
+Inselect aims to solve some of the problems associated with whole-drawer imaging
 * Identify individual specimens, along with any associated labels
 * Place bounding box around each
 * Crop out specimen-level images
@@ -89,12 +97,15 @@ Inselect aims tosolve some of the problems associated with whole-drawer imaging
 
 Start Inselect. You should see a list of keyboard shortcuts.
 
-![alt text](images/shortcuts.jpg)
+![Keyboard shortcuts](images/shortcuts.jpg)
 
 On Windows, many
 shortcuts are activated by holding down the `CTRL` key together with another key.
 On a Mac, the command button (`⌘`) is used instead of `CTRL`. This workbook
 uses `CTRL` - if you are on a Mac, press `⌘` whereever you see `CTRL` written.
+
+The toolbar offers functions relevant to the currently selected view.
+The status bar at the bottom shows some useful feedback.
 
 There are two 'views' of an Inselect document.
 
@@ -111,20 +122,22 @@ This shows a grid of icons, one icon for each bounding box:
 
 ![Objects view](images/objects.jpg)
 
-The toolbar offers functions relevant to the currently selected view.
-The status bar at the bottom shows some useful feedback.
+## The panel on the right-hand side
 
-## A minimap
+### Navigator
 
-This shows where the boxes view is zoomed to:
+This shows a 'minimap' thumbnail image and indicates where the Boxes view is
+zoomed to:
 
 ![Minimap](images/minimap.jpg)
 
-## Metadata fields
+### Metadata fields
 
 ![Metadata](images/metadata.jpg)
 
-## Some information about the loaded document
+### Information
+
+Some information about the loaded document:
 
 ![Information](images/information.jpg)
 
