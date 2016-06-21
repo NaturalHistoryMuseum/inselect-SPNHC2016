@@ -30,7 +30,8 @@ ghp-import output
 git push origin gh-pages
 ```
 
-https://NaturalHistoryMuseum.github.io/inselect-SPNHC2016
+The worksheet will be at
+https://naturalhistorymuseum.github.io/inselect-SPNHC2016/worksheet.html
 
 # Screenshots
 When taking screenshots launch Inselect using
