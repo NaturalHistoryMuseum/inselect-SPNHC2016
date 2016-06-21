@@ -69,10 +69,17 @@
 <p><em>TODO LH images and other files</em></p>
 <h2 id="the-problem"><span class="header-section-number">1.4</span> The problem</h2>
 <p>Natural history collections are vast and varied, providing quite a few challenges when digitising them.</p>
-<p>E.g. at the Natural History Museum there are an estimated 33 million insect specimens, housed in 130 thousand drawers</p>
-<p>Whole-drawer imaging</p>
-<p>Challenge is to efficiently get an image of each object along with associated metadata.</p>
-<p>Inselect aims tosolve some of the problems associated with whole-drawer imaging</p>
+<p>At the Natural History Museum, London, there are an estimated 33 million insect specimens, housed in 130 thousand drawers:</p>
+<p><img src="images/pinned_fisheye.jpg" alt="Drawers of pinned beetles at Natural History Museum, London" /></p>
+<h2 id="whole-drawer-imaging"><span class="header-section-number">1.5</span> Whole-drawer imaging</h2>
+<ul>
+<li>It is a lot easier and quicker to image 130 thousand drawers rather than 33 million individual insects</li>
+<li>By themselves, drawer-level images aren't very useful</li>
+<li>Manually cropping each image takes too much time and without unique identifiers the individual images are of questionable value</li>
+</ul>
+<p><strong>The challenge is to efficiently get a single image of each object along with its associated metadata.</strong></p>
+<h2 id="how-inselect-can-help"><span class="header-section-number">1.6</span> How Inselect can help</h2>
+<p>Inselect aims to solve some of the problems associated with whole-drawer imaging</p>
 <ul>
 <li>Identify individual specimens, along with any associated labels</li>
 <li>Place bounding box around each</li>
@@ -82,8 +89,9 @@
 </ul>
 <h1 id="quick-tour"><span class="header-section-number">2</span> Quick tour</h1>
 <p>Start Inselect. You should see a list of keyboard shortcuts.</p>
-<p><img src="images/shortcuts.jpg" alt="alt text" /></p>
+<p><img src="images/shortcuts.jpg" alt="Keyboard shortcuts" /></p>
 <p>On Windows, many shortcuts are activated by holding down the <code>CTRL</code> key together with another key. On a Mac, the command button (<code>⌘</code>) is used instead of <code>CTRL</code>. This workbook uses <code>CTRL</code> - if you are on a Mac, press <code>⌘</code> whereever you see <code>CTRL</code> written.</p>
+<p>The toolbar offers functions relevant to the currently selected view. The status bar at the bottom shows some useful feedback.</p>
 <p>There are two 'views' of an Inselect document.</p>
 <h2 id="the-boxes-view"><span class="header-section-number">2.1</span> The Boxes view</h2>
 <p>This holds a zoomable, low res version of the whole drawer image together with bounding boxes:</p>
@@ -91,15 +99,16 @@
 <h2 id="the-objects-view"><span class="header-section-number">2.2</span> The Objects view</h2>
 <p>This shows a grid of icons, one icon for each bounding box:</p>
 <p><img src="images/objects.jpg" alt="Objects view" /></p>
-<p>The toolbar offers functions relevant to the currently selected view. The status bar at the bottom shows some useful feedback.</p>
-<h2 id="a-minimap"><span class="header-section-number">2.3</span> A minimap</h2>
-<p>This shows where the boxes view is zoomed to:</p>
+<h2 id="the-panel-on-the-right-hand-side"><span class="header-section-number">2.3</span> The panel on the right-hand side</h2>
+<h3 id="navigator"><span class="header-section-number">2.3.1</span> Navigator</h3>
+<p>This shows a 'minimap' thumbnail image and indicates where the Boxes view is zoomed to:</p>
 <p><img src="images/minimap.jpg" alt="Minimap" /></p>
-<h2 id="metadata-fields"><span class="header-section-number">2.4</span> Metadata fields</h2>
+<h3 id="metadata-fields"><span class="header-section-number">2.3.2</span> Metadata fields</h3>
 <p><img src="images/metadata.jpg" alt="Metadata" /></p>
-<h2 id="some-information-about-the-loaded-document"><span class="header-section-number">2.5</span> Some information about the loaded document</h2>
+<h3 id="information"><span class="header-section-number">2.3.3</span> Information</h3>
+<p>Some information about the loaded document:</p>
 <p><img src="images/information.jpg" alt="Information" /></p>
-<h2 id="words-of-warning"><span class="header-section-number">2.6</span> Words of warning</h2>
+<h2 id="words-of-warning"><span class="header-section-number">2.4</span> Words of warning</h2>
 <ul>
 <li>Inselect lacks user documentation - the materials for this workshop constitute all the documentation that there is</li>
 <li>Inselect does not have an 'undo' feature</li>
