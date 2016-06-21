@@ -1,8 +1,8 @@
-![Logos](images/logos.png){width=100%}
-
-# Inselect{.unnumbered}
-### SYNTHESYS3 and iDigBio joint workshop on selected tools for automated metadata capture from specimen images{.unnumbered}
-### Botanischer Garten und Botanisches Museum, Berlin, 25^th^ June 2016{.unnumbered}
+---
+title: Inselect SYNTHESYS3 and iDigBio joint workshop
+subtitle: Selected tools for automated metadata capture from specimen images, Botanischer Garten und Botanisches Museum, Berlin, 25^th^ June 2016
+author: Lawrence Hudson (software engineer), Ben Price (curator of small orders), Natalie Dale-Skey (curator of Hymenoptera)
+---
 
 # Introduction
 
@@ -750,5 +750,3 @@ behave?
 
 https://github.com/NaturalHistoryMuseum/inselect
 Contact me at l.hudson@nhm.ac.uk.
-
-![Logos](images/logos.png){width=100%}
