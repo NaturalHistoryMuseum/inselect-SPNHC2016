@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="github-pandoc.css" type="text/css" />
+</head>
+<body>
+<p><img src="images/logos.png" alt="Logos" style="width:100.0%" /></p>
+<h1 id="inselect" class="unnumbered">Inselect</h1>
+<h3 id="synthesys3-and-idigbio-joint-workshop-on-selected-tools-for-automated-metadata-capture-from-specimen-images" class="unnumbered">SYNTHESYS3 and iDigBio joint workshop on selected tools for automated metadata capture from specimen images</h3>
+<h3 id="botanischer-garten-und-botanisches-museum-berlin-25th-june-2016" class="unnumbered">Botanischer Garten und Botanisches Museum, Berlin, 25<sup>th</sup> June 2016</h3>
+<h1 id="introduction"><span class="header-section-number">1</span> Introduction</h1>
+<p><em>Lawrence N Hudson - software engineer, Ben W Price - curator of small orders and Natalie Dale-Skey - curator of Hymenoptera</em></p>
+<p>This workshop will give a comprehensive overview of the Inselect desktop software and its associated command-line tools.</p>
+<ul>
+<li>Background for the workshop is at <a href="http://synthesys3.biowikifarm.net/syn3/SPNHCworkshop2016" class="uri">http://synthesys3.biowikifarm.net/syn3/SPNHCworkshop2016</a>.</li>
+<li>Inselect's home page with source code, issues and releases is <a href="https://github.com/NaturalHistoryMuseum/inselect" class="uri">https://github.com/NaturalHistoryMuseum/inselect</a></li>
+<li><a href="http://www.synthesys.info/">SYNTHESYS</a></li>
+<li><a href="https://www.idigbio.org/">iDigBio</a></li>
+</ul>
+<h2 id="topics"><span class="header-section-number">1.1</span> Topics</h2>
+<p>This workshop will cover</p>
+<ul>
+<li>image and file handling;</li>
+<li>automatic segmentation of images;</li>
+<li>metadata templates, including user-defined fields and validation;</li>
+<li>barcode reading;</li>
+<li>exporting image crops;</li>
+<li>exporting of metadata to <code>CSV</code> files;</li>
+<li>cookie cutter templates and</li>
+<li>command-line tools for unattended batch processing of images.</li>
+</ul>
+<h2 id="acknowledgements"><span class="header-section-number">1.2</span> Acknowledgements</h2>
+<ul>
+<li>Prototype and segmentation algorithm: Pieter Holtzhausen and Stéfan van der Walt</li>
+<li>Project oversight: Laurence Livermore, Vladimir Blagoderov and Vincent Smith</li>
+<li>Application development: Alice Heaton and Lawrence Hudson</li>
+<li>User testing: Louise Allan, Natalie Dale-Skey and nearly 40 NHM volunteers</li>
+</ul>
+<p>Inslect has received support from</p>
+<ul>
+<li>SYNTHESYS European Community Research Infrastructure Action under the FP7 Integrating Activities Programme (Grant agreement number 312253) and</li>
+<li>The U.K. <a href="http://www.nerc.ac.uk/">Natural Environment Research Council</a>.</li>
+</ul>
+<h2 id="preparation"><span class="header-section-number">1.3</span> Preparation</h2>
+<ol>
+<li>Download and run the appropriate installer for the latest release of Inselect (at time of writing, v0.1.33) from the <a href="https://github.com/NaturalHistoryMuseum/inselect/releases">releases tab</a>
+<ol>
+<li>Mac users should download the <code>.dmg</code> file</li>
+<li>Windows users should download one of the <code>.msi</code> files - <code>amd64</code> if using 64-bit Windows, <code>win32</code> if using 32-bit Windows</li>
+</ol></li>
+<li>If you do not already have one, download and install a good text editor. Some good options are
+<ol>
+<li>Notepad++ - free and popular (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a> Windows only)</li>
+<li>SublimeText can be used for free but nags you to buy it (<a href="https://www.sublimetext.com/" class="uri">https://www.sublimetext.com/</a> Mac and Windows)</li>
+</ol></li>
+<li>We will provide image files for use during the first half of the workshop. In the second half we will apply Inselect to your own digitisation activities so please bring some of your own images together with any related information such as details of metadata that you wish to capture</li>
+<li>Do you have an idea for this software or would you like to report a problem? Raise an issue at <a href="https://github.com/NaturalHistoryMuseum/inselect/issues" class="uri">https://github.com/NaturalHistoryMuseum/inselect/issues</a>.</li>
+<li>Optional background reading and viewing:
+<ol>
+<li>Webinar: <a href="https://www.idigbio.org/content/insights-inselect-software-automating-image-processing-barcode-reading-and-validation-user">Insights into Inselect Software: automating image processing, barcode reading, and validation of user-defined metadata</a></li>
+<li><a href="https://dx.doi.org/10.1371/journal.pone.0143402">PLOS ONE paper on Inselect</a></li>
+</ol></li>
+</ol>
+<p><em>TODO LH images and other files</em></p>
+<h2 id="the-problem"><span class="header-section-number">1.4</span> The problem</h2>
+<p>Natural history collections are vast and varied, providing quite a few challenges when digitising them.</p>
+<p>E.g. at the Natural History Museum there are an estimated 33 million insect specimens, housed in 130 thousand drawers</p>
+<p>Whole-drawer imaging</p>
+<p>Challenge is to efficiently get an image of each object along with associated metadata.</p>
+<p>Inselect aims tosolve some of the problems associated with whole-drawer imaging</p>
+<ul>
+<li>Identify individual specimens, along with any associated labels</li>
+<li>Place bounding box around each</li>
+<li>Crop out specimen-level images</li>
+<li>Capture metadata such as catalogue numbers, location within the collection, and possibly information on labels</li>
+<li>Associate metadata with the cropped images</li>
+</ul>
+<h1 id="quick-tour"><span class="header-section-number">2</span> Quick tour</h1>
+<p>Start Inselect. You should see a list of keyboard shortcuts.</p>
+<p><img src="images/shortcuts.jpg" alt="alt text" /></p>
+<p>On Windows, many shortcuts are activated by holding down the <code>CTRL</code> key together with another key. On a Mac, the command button (<code>⌘</code>) is used instead of <code>CTRL</code>. This workbook uses <code>CTRL</code> - if you are on a Mac, press <code>⌘</code> whereever you see <code>CTRL</code> written.</p>
+<p>There are two 'views' of an Inselect document.</p>
+<h2 id="the-boxes-view"><span class="header-section-number">2.1</span> The Boxes view</h2>
+<p>This holds a zoomable, low res version of the whole drawer image together with bounding boxes:</p>
+<p><img src="images/boxes.jpg" alt="Boxes view" /></p>
+<h2 id="the-objects-view"><span class="header-section-number">2.2</span> The Objects view</h2>
+<p>This shows a grid of icons, one icon for each bounding box:</p>
+<p><img src="images/objects.jpg" alt="Objects view" /></p>
+<p>The toolbar offers functions relevant to the currently selected view. The status bar at the bottom shows some useful feedback.</p>
+<h2 id="a-minimap"><span class="header-section-number">2.3</span> A minimap</h2>
+<p>This shows where the boxes view is zoomed to:</p>
+<p><img src="images/minimap.jpg" alt="Minimap" /></p>
+<h2 id="metadata-fields"><span class="header-section-number">2.4</span> Metadata fields</h2>
+<p><img src="images/metadata.jpg" alt="Metadata" /></p>
+<h2 id="some-information-about-the-loaded-document"><span class="header-section-number">2.5</span> Some information about the loaded document</h2>
+<p><img src="images/information.jpg" alt="Information" /></p>
+<h2 id="words-of-warning"><span class="header-section-number">2.6</span> Words of warning</h2>
+<ul>
+<li>Inselect lacks user documentation - the materials for this workshop constitute all the documentation that there is</li>
+<li>Inselect does not have an 'undo' feature</li>
+</ul>
+<h1 id="worked-example-1---insect-soup"><span class="header-section-number">3</span> Worked example 1 - insect soup</h1>
+<p>Objective: to place a bounding box around each object in an image and export each image crop to its own <code>JPG</code> file.</p>
+<p>This example will cover</p>
+<ul>
+<li>Inselect's image and file handling;</li>
+<li>how to create and edit bounding boxes;</li>
+<li>how to automatically segment images and</li>
+<li>how to subsegment boxes round overlapping objects.</li>
+</ul>
+<p>image handling and bounding boxes</p>
+<h2 id="opening-the-file"><span class="header-section-number">3.1</span> Opening the file</h2>
+<p><code>1.InsectSoup/Img0920+LG+C2.tif</code> - an insect soup image of Diptera - true flies</p>
+<ul>
+<li>from Australia, courtesy of the Australian Museum.</li>
+</ul>
+<ol>
+<li>Use the open file using one of
+<ul>
+<li>File, Open;</li>
+<li><code>CTRL + O</code> or</li>
+<li>Open button on toolbar</li>
+<li>Drag-and-drop; at the time of writing, this doesn't work on Mac - we will fix this in a future release</li>
+</ul></li>
+</ol>
+<p>The <code>TIFF</code> image is just under 300 MB; some images can be as large as 800MB. It takes several seconds to read files this large.</p>
+<p><img src="images/soup.jpg" alt="Insect soup" /></p>
+<h2 id="created-files"><span class="header-section-number">3.2</span> Created files</h2>
+<p>Inselect has created two files</p>
+<ol>
+<li><p><code>Img0920+LG+C2.inselect</code></p>
+<p>This is a small file that will contain information about bounding boxes and their associated metadata.</p></li>
+<li><p><code>Img0920+LG+C2_thumbnail.jpg</code></p>
+<ul>
+<li>Creating the thumbnail <code>JPG</code> is a once-only operation</li>
+<li>The thumbnail <code>JPG</code> is very quick to read - far quicker than the <code>TIFF</code></li>
+<li>Inselect therefore loads and shows the thumbnail whenever the document is opened</li>
+<li>Inselect loads the original full resolution image only as required - when saving crops or reading barcodes</li>
+</ul></li>
+</ol>
+<h2 id="image-handling"><span class="header-section-number">3.3</span> Image handling</h2>
+<p>On the 'Boxes' view you can zoom in and out by</p>
+<ul>
+<li>holding down <code>CTRL</code> and spinning the mouse wheel up or down</li>
+<li>(on a Mac) holding down <code>⌘</code> and swiping up or down with two fingers on trackpad</li>
+<li>holding down <code>CTRL</code> and pressing the <code>+</code> or <code>-</code> keys</li>
+<li>clicking the toolbar buttons</li>
+</ul>
+<p>You can pan around the image by</p>
+<ul>
+<li>using the scrollbars</li>
+<li>(on a Mac) by swiping with two fingers on trackpad</li>
+</ul>
+<h2 id="creating-and-edited-bounding-boxes"><span class="header-section-number">3.4</span> Creating and edited bounding boxes</h2>
+<p>You can create boxes with</p>
+<ul>
+<li>mouse right-click and drag</li>
+<li>(on a Mac) click the trackpad using two fingers</li>
+</ul>
+<p>You can select boxes</p>
+<ul>
+<li>Mouse drag</li>
+<li>Click on boxes</li>
+<li><code>CTRL + mouse click</code> to toggle</li>
+<li>Select all with <code>CTRL + A</code></li>
+<li>Select none with <code>CTRL + D</code></li>
+</ul>
+<p>You can move selected boxes using</p>
+<ul>
+<li>mouse drag and drop</li>
+<li>the arrow keys</li>
+</ul>
+<h2 id="segmenting"><span class="header-section-number">3.5</span> Segmenting</h2>
+<p>Creating boxes by hand is silly - we want to minimise manual steps and get the computer to do the hard work for us.</p>
+<p>Tun Inselect's segmentation algorithm</p>
+<ul>
+<li>click on the 'Segment image' button on the tool bar or</li>
+<li>press <code>F5</code></li>
+</ul>
+<p>Inselect will attempt to detect individual objects within the image and place a bounding box around each. It uses a general purpose algorithm that works well with many of the different specimen types that we tried.</p>
+<p><img src="images/soup_segmented.jpg" alt="Insect soup with bounding boxes" /></p>
+<p>The segmentation does a reasonable job but is not perfect - some manual refinement is required.</p>
+<h2 id="refining-the-results-of-segmentation"><span class="header-section-number">3.6</span> Refining the results of segmentation</h2>
+<p>We will check and refine each of the bounding boxes created by the segmentation algorithm. We will also create any bounding boxes that are missing.</p>
+<ul>
+<li>Click on a box</li>
+<li>Press <code>Z</code> to zoom to the current selection</li>
+<li>To navigate to next / previous box</li>
+<li><code>CTRL + N</code> to go to next box</li>
+<li><code>CTRL + P</code> to go to the previous box</li>
+</ul>
+<h2 id="delete-unrequired-boxes"><span class="header-section-number">3.7</span> Delete unrequired boxes</h2>
+<ul>
+<li><code>Delete</code></li>
+<li>on a Mac <code>CTRL + ⌫</code></li>
+</ul>
+<h2 id="adjust-borders-of-bounding-boxes-where-they-are-too-big-or-too-small"><span class="header-section-number">3.8</span> Adjust borders of bounding boxes where they are too big or too small</h2>
+<p>You can adjust boxes using</p>
+<ul>
+<li>the mouse resize handles</li>
+<li>keyboard arrow keys
+<ul>
+<li><code>SHIFT +</code> arrow keys moves the bottom right of the box</li>
+<li><code>ALT +</code> arrow keys moves the top left of the box</li>
+</ul></li>
+</ul>
+<h2 id="split-apart-boxes-that-encompass-more-than-one-object"><span class="header-section-number">3.9</span> Split apart boxes that encompass more than one object</h2>
+<p>This often happens when objects slightly overlap e.g., insect wings. We could resize the large box and create new ones but this is uneccesary manual work.</p>
+<ul>
+<li><code>SHIFT +</code> click on the approximate centre of object within the bounding box - Inselect marks each point with a crosshair</li>
+<li>You can remove crosshair by unselecting the box</li>
+</ul>
+<p><img src="images/soup_subsegment.jpg" alt="Flies with overlapping wings" /></p>
+<ul>
+<li>Run the 'Subsegment box', either from the toolbar or with <code>F6</code></li>
+</ul>
+<p><img src="images/soup_subsegmented.jpg" alt="Subsegmented flies" /></p>
+<p><img src="images/soup_refined.jpg" alt="Insect soup with fully refined bounding boxes" /></p>
+<h2 id="export-crops"><span class="header-section-number">3.10</span> Export crops</h2>
+<p>Click on 'Save crops' in the 'Export' section of the toolbar.</p>
+<ul>
+<li>Inselect loads the original full-resolution image</li>
+<li>It applies bounding boxes to the original full-resolution image and crops each box</li>
+<li>Saves each box to <code>JPG</code> - we could ask Inselect to export to another image format - this will be covered later</li>
+<li><strong>No EXIF data are copied</strong></li>
+</ul>
+<h1 id="worked-example-2---pinned-insects"><span class="header-section-number">4</span> Worked example 2 - pinned insects</h1>
+<p>Objective: to configure and use Inselect metadata templates.</p>
+<p>This example will cover</p>
+<ul>
+<li>how inselect treats metadata and validation;</li>
+<li>Inselect's metadata template format and</li>
+<li>how to export crops and <code>CSV</code> files.</li>
+</ul>
+<h2 id="preamble"><span class="header-section-number">4.1</span> Preamble</h2>
+<p>Open <code>2.Metadata\Scopelodes_spp_Lim_14.inselect</code></p>
+<ul>
+<li>This is a SatScan image of pinned insects - moths in family Limacodidae</li>
+<li>Open the image, segment and refine boxes</li>
+</ul>
+<p><img src="images/moths_refined.jpg" alt="Moths with bounding boxes" /></p>
+<h2 id="metadata-template-in-inselect"><span class="header-section-number">4.2</span> Metadata template in Inselect</h2>
+<p>You have complete control over metadata fields and validation through <code>.inselect_template</code> files, which are simple text files that you can edit using any good text editor.</p>
+<ul>
+<li>Load the <code>limacodidae.inselect_template</code> template by clicking on the <code>Simple Darwin Core</code> button and clicking <code>Choose...</code></li>
+<li>Pink shading over the bounding boxes indicates one or more validation problems, so we can see at a glance any boxes that need our attention</li>
+<li>The template specifies that the <code>Location</code> and <code>Taxonomy</code> fields are both mandatory - newly created bounding boxes have no metadata, so all of the bounding boxes are shaded pink to indicate a validation probem</li>
+</ul>
+<p><img src="images/moths_template1.jpg" alt="Moths with metadata validation failures" /></p>
+<p>Click on any of the bounding boxes. The <code>Location</code> and <code>Taxonomy</code> fields are both coloured pink, indicating a validation problem</p>
+<p><img src="images/moths_template2.jpg" alt="Moths with single box selected" /></p>
+<ul>
+<li>Set <code>Location</code> to Drawer 1</li>
+<li>Set <code>Taxonomy</code> to <em>Scopelodes</em></li>
+<li>The pink shading is removed from the fields and box</li>
+</ul>
+<p><img src="images/moths_template3.jpg" alt="Moths with single box selected" /></p>
+<p>Let's set the metadata for all boxes</p>
+<ul>
+<li><code>CTRL + A</code> to select all boxes</li>
+<li>The field both contain a '*' to indicate multiple values among boxes</li>
+<li>Set <code>Location</code> to Drawer 1 and <code>Location</code> to <em>Scopelodes</em></li>
+</ul>
+<p><img src="images/moths_template4.jpg" alt="Moths with all boxes valid" /></p>
+<h2 id="metadata-panel"><span class="header-section-number">4.3</span> Metadata panel</h2>
+<p>The metadata panel on the right shows <a href="http://rs.tdwg.org/dwc/terms/simple/">Simple Darwin Core</a> fields</p>
+<ul>
+<li>Links to definitions</li>
+<li>Simple validation e.g.,</li>
+<li>Tag a couple of boxes and show behaviour</li>
+<li>Sensible default but limited</li>
+</ul>
+<h2 id="creating-and-editing-metadata-templates"><span class="header-section-number">4.4</span> Creating and editing metadata templates</h2>
+<p>Files are in a format called YAML (YAML Ain't a Markup Language - <a href="http://yaml.org" class="uri">http://yaml.org</a>) - a structured text format. A reference and examples template files are at <a href="https://github.com/NaturalHistoryMuseum/inselect-templates" class="uri">https://github.com/NaturalHistoryMuseum/inselect-templates</a> - open this page in a new browser tab and have a quick look through it.</p>
+<p>Open <code>limacodidae.inselect_template</code> in your text editor:</p>
+<pre><code>Name: Limacodidae
+Object label: &#39;{Taxonomy}-{Location}-{ItemNumber}&#39;
+Fields:
+    - Name: Taxonomy
+      Mandatory: true
+      Choices:
+          - Anaxidia
+          - Anepopsia
+          - Apodecta
+          - Birthamoides
+          - Calcarifera
+          - Chalcocelis
+          - Comana
+          - Comanula
+          - Doratifera
+          - Ecnomoctena
+          - Elassoptila
+          - Eloasa
+          - Hedraea
+          - Hydroclada
+          - Lamprolepida
+          - Limacochara
+          - Mambara
+          - Mecytha
+          - Parasoidea
+          - Praesusica
+          - Pseudanapaea
+          - Pygmaeomorpha
+          - Scopelodes
+          - Squamosa
+          - Thosea
+    - Name: Location
+      Mandatory: true
+      Choices:
+          - Drawer 1
+          - Drawer 2
+          - Drawer 3
+          - Drawer 4</code></pre>
+<p>When you come to create your own <code>.inselect_template</code> files, it is best to modify an existing template to suit your needs.</p>
+<h2 id="editing-the-template"><span class="header-section-number">4.5</span> Editing the template</h2>
+<p>You will append a new, optional free-text field - <code>Notes</code> - to the template.</p>
+<ul>
+<li>Use your text editor to add the field to the template</li>
+<li>Click on the 'Limacoididae' button in Inselect and select 'Reload'</li>
+</ul>
+<h2 id="export-metadata-and-bounding-boxes-to-a-csv-file"><span class="header-section-number">4.6</span> Export metadata and bounding boxes to a CSV file</h2>
+<p>Click 'Export CSV' in the toolbar and open the <code>CSV</code> file in Excel, OpenOffice or similar.</p>
+<p>Columns are</p>
+<ul>
+<li><code>Cropped_image_name</code> - the filename of the crop</li>
+<li>`ItemNumber - the number of the bounding box</li>
+<li>Locations of the bounding boxes in
+a. normalised (i.e., between 0 and 1) coordinates - <code>NormalisedLeft</code>, <code>NormalisedTop</code>, <code>NormalisedRight</code>, <code>NormalisedBottom</code>
+b. coordinates of the thumbnail image - <code>ThumbnailLeft</code>, <code>ThumbnailTop</code>, <code>ThumbnailRight</code>, <code>ThumbnailBottom</code>
+<p>c. coordinates of the original full-resolution image - <code>OriginalLeft</code>, <code>OriginalTop</code>, <code>OriginalRight</code>, <code>OriginalBottom</code></p></li>
+<li>A column for each of the metadata fields defined in the template
+<ul>
+<li><code>Taxonomy</code></li>
+<li><code>Location</code></li>
+<li><code>Notes</code></li>
+</ul></li>
+</ul>
+<h1 id="worked-example-3---microscope-slides"><span class="header-section-number">5</span>  Worked example 3 - microscope slides</h1>
+<p>Our third example is another SatScan image, this time of microscope slides arranged in a template. Each of the slides contains a DataMatrix barcode and we will look at Inselect's barcode reader</p>
+<p>Objective: to read barcodes on microscope slides, rotate each slide to be in the correct orientation and to export cropped images.</p>
+<p>This example will cover</p>
+<ul>
+<li>Barcode reading</li>
+<li>The Objects view</li>
+<li>Rotating objects</li>
+<li>Sorting boxes into rows and columns</li>
+</ul>
+<h2 id="preamble-1"><span class="header-section-number">5.1</span>  Preamble</h2>
+<ul>
+<li>Open <code>3.Barcodes/sialidae.inselect.template</code>
+<ul>
+<li>A higher-resolution thumbnail - useful for reading and transcribing labels on slides</li>
+<li>Exported crops are saved to <code>TIFF</code> files</li>
+<li>More complex metadata validation</li>
+</ul></li>
+<li>Load <code>3.Barcodes/Drawer_40b_w45a_45b_46_47a.inselect</code></li>
+<li>Select 'Light background' in the 'Box colours' section of the toolbar
+<ul>
+<li>This alters the colours of the bounding boxes</li>
+<li>We hope to automate this in a future release</li>
+</ul></li>
+<li>Segment</li>
+</ul>
+<p><img src="images/slides.jpg" alt="Microscope slides" /></p>
+<h2 id="refine"><span class="header-section-number">5.2</span> Refine</h2>
+<p>There are 100 sockets but automatic segmentation has created 102 boxes. Some of the sockets do not contain slides but contain red markers that indicate the location and genus of the slides that follow:</p>
+<p><img src="images/slides_detail.jpg" alt="Microscope slides" /></p>
+<ul>
+<li>Remove the boxes around the stickers at the top left and top right</li>
+<li>Remove the boxes around the red markers</li>
+</ul>
+<p>Once refined, you should have 95 bounding boxes:</p>
+<p><img src="images/slides_refined.jpg" alt="Microscope slides" /></p>
+<h2 id="metadata-template"><span class="header-section-number">5.3</span> Metadata template</h2>
+<p>Open <code>3.Barcodes/sialidae.inselect.template</code> in your text editor</p>
+<ul>
+<li><p>The 'catalogNumber' field contains <code>Regex parser: '^[0-9]{9}$'</code></p></li>
+<li>This is a regular expression that specifies the field should contain exactly nine digits with no letters or punctuation</li>
+<li><p>If you do not know what a regular expression is, do not worry</p></li>
+</ul>
+<h2 id="setup-barcode-reading"><span class="header-section-number">5.4</span> Setup barcode reading</h2>
+<p>Select 'Configure' from the 'Barcodes' section of the toolbar:</p>
+<p><img src="images/barcodes_config.jpg" alt="Barcode reading options" /></p>
+<ul>
+<li>Inselect comes with two open source options</li>
+<li>The Commercial Inlite ClearImage is faster and is more reliable at reading barcodes
+<ul>
+<li>Windows only</li>
+<li>Costly but you can run it for a short time with an evaluation license</li>
+<li>If you are on Windows
+<ul>
+<li>Open <a href="https://www.inliteresearch.com/barcode-recognition-sdk.php" class="uri">https://www.inliteresearch.com/barcode-recognition-sdk.php</a></li>
+<li>Click 'Download ClearImage SDK' and install</li>
+<li>Start the 'Inlite control centre' - this will give you an evaluation license</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="read-barcodes"><span class="header-section-number">5.5</span> Read barcodes</h2>
+<p>Read barcodes with <code>F7</code>.</p>
+<ul>
+<li>Takes a few minutes to complete</li>
+<li>We are asking quite a lot of the barcode reader - the barcodes make up about 1% of the area of each crop</li>
+<li>Values of barcodes are always put into 'catalogNumber' field</li>
+</ul>
+<h2 id="other-metadata"><span class="header-section-number">5.6</span> Other metadata</h2>
+<p>You will select the relevant groups of slides and set their values of location and genus.</p>
+<p>Reminders</p>
+<ul>
+<li>You can select bounding boxes with left-click and drag</li>
+<li>You can add / remove individual boxes from the selection by holding down <code>CTRL</code> and left-clicking</li>
+</ul>
+<p>Once completed, all metadata should be valid with all boxes clear:</p>
+<p><img src="images/slides_finished.jpg" alt="Completed slides" /></p>
+<h2 id="sorting-boxes"><span class="header-section-number">5.7</span> Sorting boxes</h2>
+<p>You can sort boxes either by rows or columns.</p>
+<ul>
+<li>Press <code>CTRL + N</code> a few times and see how selected box changes</li>
+<li>Now click 'Into columns' in the 'Sort boxes' section of the toolbar</li>
+<li>Press <code>CTRL + N</code> a few times again</li>
+</ul>
+<p>The selected sort option is applied when you segment an image.</p>
+<h2 id="objects-view"><span class="header-section-number">5.8</span> Objects view</h2>
+<p>Switch to the Objects view.</p>
+<p>Some relevant shortcuts</p>
+<ul>
+<li><code>CTRL + 1</code> / <code>CTRL + B</code> - selects the Boxes view</li>
+<li><code>CTRL + 2</code> / <code>CTRL + J</code> - selects the Objects view</li>
+<li>Can switch between views using
+<ul>
+<li><code>CTRL + PgUp</code> / <code>CTRL + PgDown</code> on Windows</li>
+<li><code>CMD + [</code> / <code>CMD + ]</code> on Mac</li>
+</ul></li>
+</ul>
+<p>This view shows crops on a grid with a square for each bounding box, along with each box's number and object label:</p>
+<p><img src="images/slides_objects.jpg" alt="Completed slides" /></p>
+<ul>
+<li>You can expand a single box
+<ul>
+<li>press <code>Enter</code></li>
+<li>double click</li>
+<li><code>CTRL + E</code></li>
+</ul></li>
+<li>Move forwards and backwards through boxes
+<ul>
+<li>up and down arrows</li>
+<li><code>CTRL + N</code> and <code>CTRL + P</code> - Next / Previous</li>
+</ul></li>
+<li>You can go back to the grid
+<ul>
+<li>Press <code>Enter</code></li>
+<li>Double click</li>
+<li><code>CTRL + G</code></li>
+</ul></li>
+</ul>
+<p>Selection</p>
+<ul>
+<li>You can select icon using the mouse</li>
+<li>You can select squares using SHIFT + arrow keys</li>
+<li>As you might expect <code>CTRL + A</code> and <code>CTRL + D</code> - the standard shortcuts for Select all and Select none - also work here</li>
+<li>Just as before, the metadata fields reflect the selection</li>
+</ul>
+<h2 id="rotation"><span class="header-section-number">5.9</span> Rotation</h2>
+<p>You will rotate each crop so that labels are in the correct orientation.</p>
+<ul>
+<li><code>CTRL + R</code> to rotate right</li>
+<li><code>CTRL + L</code> to rotate left</li>
+<li>Applied to current selection, so you can block-select and rotate.</li>
+<li>Useful for reading labels</li>
+<li>Rotation is applied to crops so when they are saved</li>
+</ul>
+<p><img src="images/slides_rotated.jpg" alt="Rotated slides" /></p>
+<h2 id="export-crops-1"><span class="header-section-number">5.10</span> Export crops</h2>
+<p>Click 'Save crops'</p>
+<p>Open the directory containing the crops.</p>
+<ul>
+<li>Filenames from metadata template</li>
+<li>Saves to <code>TIFF</code> files, as specified in the metadata template</li>
+<li>Has Inselect exported crops with the rotation the you specified?</li>
+</ul>
+<!-- ## Document-level validation
+
+* Select the first three boxes in the first row
+* Set the 'Catalog number' for these boxes to the same valid value - '010000000'
+* Click 'Export crops'
+
+What does Inselect do?
+* Do both boxes contain valid metadata?
+* Do you understand the message that Inselect shows you?
+* Answer 'Yes' to the 'Would you like to save the object images?' question
+ - look at the names of the first three exported crops - how has Inselect treated the filenames of the first three boxes?
+ -->
+<h1 id="worked-example-4---cookie-cutter-templates"><span class="header-section-number">6</span> Worked example 4 - cookie cutter templates</h1>
+<p>The microscope slides are arranged on a 20 x 5 template. If you are regularly dealing with hundreds or thousands of sacnned images with an identical arrangement of objects then automatic segmentation is imperfect.</p>
+<p>Objective: to create and use cookie cutter templates.</p>
+<p>This example will cover creating and applying cookie cutter template.</p>
+<h2 id="create-cookie-cutter-template-for-slides"><span class="header-section-number">6.1</span> Create cookie cutter template for slides</h2>
+<p>With</p>
+<ul>
+<li>Open <code>Drawer_76_77_78_79_81_83a.jpg</code></li>
+<li>Segment and delete the three erroneous boxes</li>
+<li><p>Check that the 100 bounding boxes are in the right places</p></li>
+<li>Click 'Cookie cutter' on the toolbar and select 'Save boxes to new cookie cutter...' Call it <code>20 x 5 slides</code></li>
+<li>Inselect saves the bounding boxes only to the template - metadata is not saved</li>
+<li><p>Inselect sets the new file as the current cookie cutter</p></li>
+</ul>
+<h2 id="apply-cookie-cutter"><span class="header-section-number">6.2</span> Apply cookie cutter</h2>
+<p>Open <code>Drawer_60b_61_62a.jpg</code> Inselect creates boxes using cookie cutter.</p>
+<ul>
+<li>Select all, zoom in, fine tune exact positons with mouse or keyboard</li>
+<li>Unsatisfactory, crude solution but has proved to be a time saver - need a more automated method</li>
+</ul>
+<h1 id="command-line-tools"><span class="header-section-number">7</span> Command-line tools</h1>
+<ul>
+<li>If you expect to be working on batches of hundreds or thousands of images</li>
+<li>An advanced topic</li>
+<li>Requires some IT knowledge so best undertaken together with your IT staff</li>
+</ul>
+<p>Objective: to ingest the five example image files in <code>5.CommandLineTools</code> and apply the cookie cutter that you previously created.</p>
+<p>This example will provide an introduction to Inselect's command line tools.</p>
+<h2 id="workflow"><span class="header-section-number">7.1</span> Workflow</h2>
+<p><img src="images/workflow.svg" alt="Inselect workflow" /></p>
+<p>Each of the operations shown in blue has an associated command-line tool. You can pick and choose the relevant command-line tools together with cookie cutters and metadata templates to integrate Inselect into your existing workflows. Descriptions of each tool are below.</p>
+<h3 id="ingest"><span class="header-section-number">7.1.1</span> <code>ingest</code></h3>
+<ul>
+<li>You provide the paths to an input directory and on output directory; these can be the same</li>
+<li>For each image file in the input directory
+<ul>
+<li>Moves the image to the output directory</li>
+<li>Creates the <code>.inselect</code> file</li>
+<li>Create the thumbnail <code>JPG</code>; you can provide the resolution</li>
+<li>Optionally applies a cookie cutter</li>
+</ul></li>
+</ul>
+<h3 id="segment"><span class="header-section-number">7.1.2</span> <code>segment</code></h3>
+<ul>
+<li>You provide the path to a directory</li>
+<li>For each <code>.inselect</code> file in the directory
+<ul>
+<li>Runs automatic segmentation</li>
+<li>You can specify whether to sort boxes by columns or by rows</li>
+</ul></li>
+</ul>
+<h3 id="read_barcodes"><span class="header-section-number">7.1.3</span> <code>read_barcodes</code></h3>
+<ul>
+<li>You provide the path to a directory</li>
+<li>For each <code>.inselect</code> file in the directory
+<ul>
+<li>Reads barcodes using the reader that you specify</li>
+</ul></li>
+</ul>
+<h3 id="export_metadata"><span class="header-section-number">7.1.4</span> <code>export_metadata</code></h3>
+<ul>
+<li>You provide the path to a directory</li>
+<li>For each <code>.inselect</code> file in the directory
+<ul>
+<li>Writes a <code>CSV</code> file of metadata</li>
+<li>You can specify an Inselect template file</li>
+<li>Files with validations errors are ignored</li>
+</ul></li>
+</ul>
+<h3 id="save_crops"><span class="header-section-number">7.1.5</span> <code>save_crops</code></h3>
+<ul>
+<li>You provide the path to a directory</li>
+<li>For each <code>.inselect</code> file in the directory
+<ul>
+<li>Writes cropped images</li>
+<li>You can specify an Inselect template file that will be used to format the crop filenames</li>
+<li>Files with validations errors are ignored</li>
+</ul></li>
+</ul>
+<h2 id="test-that-you-can-run-tools"><span class="header-section-number">7.2</span> Test that you can run tools</h2>
+<p>Start the Windows command prompt. The following code fragments assume that you installed Inselect to the default location of <code>C:\Program Files\inselect</code>. You should alter the paths as required, if you installed the program to a different directory.</p>
+<p>Each tool supports the <code>--help</code> argument:</p>
+<pre><code>C:\Program Files\inselect\ingest.exe --help</code></pre>
+<p>You should see</p>
+<pre><code>usage: ingest.exe [-h] [-c COOKIE_CUTTER] [-w THUMBNAIL_WIDTH] [--debug] [-v]
+                  inbox docs
+
+Ingests images into Inselect
+
+positional arguments:
+  inbox                 Source directory containing scanned images
+  docs                  Destination directory to which images will be moved
+                        and in which Inselect documents will be created. Can
+                        be the same as inbox.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c COOKIE_CUTTER, --cookie-cutter COOKIE_CUTTER
+                        Path to a &#39;.inselect_cookie_cutter&#39; file that will be
+                        applied to new Inselect documents
+  -w THUMBNAIL_WIDTH, --thumbnail-width THUMBNAIL_WIDTH
+                        The width of the thumbnail in pixels; defaults to 4096
+  --debug
+  -v, --version         show program&#39;s version number and exit</code></pre>
+<h2 id="ingest-images"><span class="header-section-number">7.3</span> Ingest images</h2>
+<p>The <code>5.CommandLineTools</code> directory contains five <code>JPG</code> files. Run</p>
+<pre><code>C:\Program Files\inselect\ingest.exe --thumbnail-width 8000 \
+    --cookie-cutter &lt;path to the inselect_cookie_cutter file&gt; \
+    &lt;path to the 5.CommandLineTools directory&gt; \
+    &lt;path to the 5.CommandLineTools directory&gt;</code></pre>
+<ul>
+<li>What did the <code>ingest</code> tool report?</li>
+<li>One of the image files has a deliberate error - how did the <code>ingest</code> tool behave?</li>
+</ul>
+<h2 id="roundup"><span class="header-section-number">7.4</span> Roundup</h2>
+<p><a href="https://github.com/NaturalHistoryMuseum/inselect" class="uri">https://github.com/NaturalHistoryMuseum/inselect</a> Contact me at <script type="text/javascript">
+<!--
+h='&#110;&#104;&#x6d;&#46;&#x61;&#x63;&#46;&#x75;&#x6b;';a='&#64;';n='&#108;&#46;&#104;&#x75;&#100;&#x73;&#x6f;&#110;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#108;&#46;&#104;&#x75;&#100;&#x73;&#x6f;&#110;&#32;&#x61;&#116;&#32;&#110;&#104;&#x6d;&#32;&#100;&#x6f;&#116;&#32;&#x61;&#x63;&#32;&#100;&#x6f;&#116;&#32;&#x75;&#x6b;</noscript>.</p>
+<p><img src="images/logos.png" alt="Logos" style="width:100.0%" /></p>
+</body>
+</html>
