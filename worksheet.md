@@ -106,9 +106,6 @@ shortcuts are activated by holding down the `CTRL` key together with another key
 On a Mac, the command button (`⌘`) is used instead of `CTRL`. This workbook
 uses `CTRL` - if you are on a Mac, press `⌘` whereever you see `CTRL` written.
 
-The toolbar offers functions relevant to the currently selected view.
-The status bar at the bottom shows some useful feedback.
-
 There are two 'views' of an Inselect document.
 
 ## The Boxes view
@@ -124,16 +121,23 @@ This shows a grid of icons, one icon for each bounding box:
 
 ![Objects view](images/objects.jpg)
 
+## The toolbar and status bar
+The toolbar offers functions relevant to the currently selected view.
+The status bar at the bottom shows some useful feedback.
+
+![The toolbar and status bar](images/toolbar_and_statusbar.jpg)
+
 ## The panel on the right-hand side
 
 ### Navigator
 
-This shows a 'minimap' thumbnail image and indicates where the Boxes view is
-zoomed to:
+A 'minimap' thumbnail image and indicates where the Boxes view is zoomed to:
 
 ![Minimap](images/minimap.jpg)
 
 ### Metadata fields
+
+Metadata templates give you control over the fields and validation:
 
 ![Metadata](images/metadata.jpg)
 
