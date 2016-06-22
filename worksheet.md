@@ -55,16 +55,16 @@ Inslect has received support from
 Some good options are
     1. Notepad++ - free and popular (https://notepad-plus-plus.org/ Windows only)
     2. SublimeText can be used for free but nags you to buy it (https://www.sublimetext.com/ Mac and Windows)
-3. We will provide image files for use during the first half of the workshop.
-In the second half we will apply Inselect to your own digitisation activities so
-please bring some of your own images together with any related information such
-as details of metadata that you wish to capture
-4. Do you have an idea for this software or would you like to report a problem? Raise an issue at https://github.com/NaturalHistoryMuseum/inselect/issues.
-5. Optional background reading and viewing:
+3. Download a zip file of files from **TODO URL**
+    1. Extract the zip file to a location that you can find easily, such as
+    your desktop
+    2. These files will be used for the first half of the workshop - in the
+    second half we will apply Inselect to your own digitisation activities so
+    please bring some of your own images together with any related information
+    such as details of metadata that you wish to capture
+4. Optional background reading and viewing:
     1. Webinar: [Insights into Inselect Software: automating image processing, barcode reading, and validation of user-defined metadata](https://www.idigbio.org/content/insights-inselect-software-automating-image-processing-barcode-reading-and-validation-user)
     2. [PLOS ONE paper on Inselect](https://dx.doi.org/10.1371/journal.pone.0143402)
-
-*TODO LH images and other files*
 
 ## The problem
 Natural history collections are vast and varied, providing quite a few challenges
@@ -141,6 +141,12 @@ Some information about the loaded document:
 
 ![Information](images/information.jpg)
 
+## File sizes
+
+Many digitisation pipelines use `TIFF` images. Whole-drawer `TIFF` images can
+be extremely large - up to 800MB is common. The examples in this worksheet use
+`JPG` files in order to minimize amount of data that you need to download.
+
 ## Words of warning
 
 * Inselect lacks user documentation - the materials for this workshop constitute
@@ -153,16 +159,14 @@ Objective: to place a bounding box around each object in an image and export
 each image crop to its own `JPG` file.
 
 This example will cover
-* Inselect's image and file handling;
-* how to create and edit bounding boxes;
-* how to automatically segment images and
-* how to subsegment boxes round overlapping objects.
-
-image handling and bounding boxes
+* Inselect's image and file handling
+* How to create and edit bounding boxes
+* How to automatically segment images
+* How to subsegment boxes round overlapping objects
 
 ## Opening the file
 
-`1.InsectSoup/Img0920+LG+C2.tif` - an insect soup image of Diptera - true flies
+`1.InsectSoup/Img0920+LG+C2.jpg` - an insect soup image of Diptera - true flies
 - from Australia, courtesy of the Australian Museum.
 
 Use the open file using one of
@@ -186,8 +190,10 @@ Inselect has created two files
 
     * Creating the thumbnail `JPG` is a once-only operation
     * The thumbnail `JPG` is very quick to read - far quicker than the large
-    high-resolution `TIFF` files that are typically used in digitisation programmes
-    * Inselect therefore loads and shows the thumbnail whenever the document is opened
+    high-resolution `TIFF` files that are typically used in digitisation
+    programmes
+    * Inselect therefore loads and shows the thumbnail whenever the document is
+    opened
     * Inselect loads the original full resolution image only as required - when
     saving crops or reading barcodes
 
@@ -195,31 +201,31 @@ Inselect has created two files
 
 On the 'Boxes' view you can zoom in and out by
 
-* holding down `CTRL` and spinning the mouse wheel up or down
-* (on a Mac) holding down `⌘` and swiping up or down with two fingers on trackpad
-* holding down `CTRL` and pressing the `+` or `-` keys
-* clicking the toolbar buttons
+* Holding down `CTRL` and spinning the mouse wheel up or down
+* On a Mac, holding down `⌘` and swiping up or down with two fingers on trackpad
+* Holding down `CTRL` and pressing the `+` or `-` keys
+* Clicking the toolbar buttons
 
 You can pan around the image by
-* using the scrollbars
-* (on a Mac) by swiping with two fingers on trackpad
+* Using the scrollbars
+* On a Mac, by swiping with two fingers on trackpad
 
 ## Creating and edited bounding boxes
 
 You can create boxes with
-* mouse right-click and drag
-* (on a Mac) click the trackpad using two fingers
+* Mouse right-click and drag
+* On a Mac, click the trackpad using two fingers
 
 You can select boxes
 * Mouse drag
-* Click on boxes
-* `CTRL + mouse click` to toggle
+* Click on a box
+* `CTRL + mouse click` to toggle a box
 * Select all with `CTRL + A`
 * Select none with `CTRL + D`
 
 You can move selected boxes using
-* mouse drag and drop
-* the arrow keys
+* Mouse drag and drop
+* The arrow keys
 
 ## Segmenting
 
@@ -257,8 +263,8 @@ algorithm. We will also create any bounding boxes that are missing.
 
 ## Adjust borders of bounding boxes where they are too big or too small
 You can adjust boxes using
-* the mouse resize handles
-* keyboard arrow keys
+* The mouse resize handles
+* Keyboard arrow keys
     * `SHIFT +` arrow keys moves the bottom right of the box
     * `ALT +` arrow keys moves the top left of the box
 
@@ -296,15 +302,15 @@ format - this will be covered later
 Objective: to configure and use Inselect metadata templates.
 
 This example will cover
-* how inselect treats metadata and validation;
-* Inselect's metadata template format and
-* how to export crops and `CSV` files.
+* How inselect treats metadata and validation
+* Inselect's metadata template format
+* How to export crops and `CSV` files
 
 ## Preamble
 
 Open `2.Metadata\Scopelodes_spp_Lim_14.inselect`
 * This is a SatScan image of pinned insects - moths in family Limacodidae
-* Open the image, segment and refine boxes
+* Segment the image and refine bounding boxes
 
 ![Moths with bounding boxes](images/moths_refined.jpg)
 
@@ -314,7 +320,7 @@ You have complete control over metadata fields and validation through
 `.inselect_template` files, which are simple text files that you can edit
 using any good text editor.
 
-* Load the `limacodidae.inselect_template` template by clicking on the
+* Load the `Templates/limacodidae.inselect_template` template by clicking on the
 `Simple Darwin Core` button and clicking `Choose...`
 * Pink shading over the bounding boxes indicates one or more validation problems,
 so we can see at a glance any boxes that need our attention
@@ -449,9 +455,9 @@ This example will cover
 
 ## Preamble
 
-* Open `3.Barcodes/sialidae.inselect.template`
-    * A higher-resolution thumbnail - useful for reading and
-    transcribing labels on slides
+* Open `Templates/sialidae.inselect_template`
+    * Specifies a higher-resolution thumbnail than used in previous examples -
+    useful for reading and transcribing labels on slides
     * Exported crops are saved to `TIFF` files
     * More complex metadata validation
 * Load `3.Barcodes/Drawer_40b_w45a_45b_46_47a.inselect`
@@ -479,7 +485,7 @@ Once refined, you should have 95 bounding boxes:
 
 ## Metadata template
 
-Open `3.Barcodes/sialidae.inselect.template` in your text editor
+Open `Templates/sialidae.inselect_template` in your text editor
 
 * The 'catalogNumber' field contains `Regex parser: '^[0-9]{9}$'`
 
@@ -747,5 +753,7 @@ behave?
 
 ## Roundup
 
-https://github.com/NaturalHistoryMuseum/inselect
-Contact me at l.hudson@nhm.ac.uk.
+* Inselect home page: https://github.com/NaturalHistoryMuseum/inselect
+* Contact me at l.hudson@nhm.ac.uk
+* Do you have an idea for this software or would you like to report a problem?
+  Raise an issue at https://github.com/NaturalHistoryMuseum/inselect/issues
