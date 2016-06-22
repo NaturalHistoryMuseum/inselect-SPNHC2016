@@ -615,7 +615,7 @@ What does Inselect do?
 # Worked example 4 - cookie cutter templates
 
 The microscope slides are arranged on a 20 x 5 template. If you are regularly
-dealing with hundreds or thousands of sacnned images with an identical
+dealing with hundreds or thousands of scanned images with an identical
 arrangement of objects then automatic segmentation is imperfect.
 
 Objective: to create and use cookie cutter templates.
@@ -625,7 +625,7 @@ This example will cover creating and applying cookie cutter template.
 ## Create cookie cutter template for slides
 
 With 
-* Open `Drawer_76_77_78_79_81_83a.jpg`
+* Open `Drawer_76_77_78_79_81_83a.inselect`
 * Segment and delete the three erroneous boxes
 * Check that the 100 bounding boxes are in the right places
 
@@ -640,8 +640,8 @@ Open `Drawer_60b_61_62a.jpg`
 Inselect creates boxes using cookie cutter.
 
 * Select all, zoom in, fine tune exact positons with mouse or keyboard
-* Unsatisfactory, crude solution but has proved to be a time saver  - need a
-more automated method
+* Cookie cutters are an unsatisfactory, crude solution - we would like a more
+automated method - but they have  proved to be a time saver
 
 # Command-line tools
 
