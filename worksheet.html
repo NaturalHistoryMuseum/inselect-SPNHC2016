@@ -72,15 +72,17 @@
 <li>Notepad++ - free and popular (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a> Windows only)</li>
 <li>SublimeText can be used for free but nags you to buy it (<a href="https://www.sublimetext.com/" class="uri">https://www.sublimetext.com/</a> Mac and Windows)</li>
 </ol></li>
-<li>We will provide image files for use during the first half of the workshop. In the second half we will apply Inselect to your own digitisation activities so please bring some of your own images together with any related information such as details of metadata that you wish to capture</li>
-<li>Do you have an idea for this software or would you like to report a problem? Raise an issue at <a href="https://github.com/NaturalHistoryMuseum/inselect/issues" class="uri">https://github.com/NaturalHistoryMuseum/inselect/issues</a>.</li>
+<li>Download a zip file of files from <strong>TODO URL</strong>
+<ol>
+<li>Extract the zip file to a location that you can find easily, such as your desktop</li>
+<li>These files will be used for the first half of the workshop - in the second half we will apply Inselect to your own digitisation activities so please bring some of your own images together with any related information such as details of metadata that you wish to capture</li>
+</ol></li>
 <li>Optional background reading and viewing:
 <ol>
 <li>Webinar: <a href="https://www.idigbio.org/content/insights-inselect-software-automating-image-processing-barcode-reading-and-validation-user">Insights into Inselect Software: automating image processing, barcode reading, and validation of user-defined metadata</a></li>
 <li><a href="https://dx.doi.org/10.1371/journal.pone.0143402">PLOS ONE paper on Inselect</a></li>
 </ol></li>
 </ol>
-<p><em>TODO LH images and other files</em></p>
 <h2 id="the-problem"><span class="header-section-number">1.4</span> The problem</h2>
 <p>Natural history collections are vast and varied, providing quite a few challenges when digitising them.</p>
 <p>At the Natural History Museum, London, there are an estimated 33 million insect specimens, housed in 130 thousand drawers:</p>
@@ -122,7 +124,9 @@
 <h3 id="information"><span class="header-section-number">2.3.3</span> Information</h3>
 <p>Some information about the loaded document:</p>
 <p><img src="images/information.jpg" alt="Information" /></p>
-<h2 id="words-of-warning"><span class="header-section-number">2.4</span> Words of warning</h2>
+<h2 id="file-sizes"><span class="header-section-number">2.4</span> File sizes</h2>
+<p>Many digitisation pipelines use <code>TIFF</code> images. Whole-drawer <code>TIFF</code> images can be extremely large - up to 800MB is common. The examples in this worksheet use <code>JPG</code> files in order to minimize amount of data that you need to download.</p>
+<h2 id="words-of-warning"><span class="header-section-number">2.5</span> Words of warning</h2>
 <ul>
 <li>Inselect lacks user documentation - the materials for this workshop constitute all the documentation that there is</li>
 <li>Inselect does not have an 'undo' feature</li>
@@ -136,9 +140,8 @@
 <li>How to automatically segment images</li>
 <li>How to subsegment boxes round overlapping objects</li>
 </ul>
-<p>image handling and bounding boxes</p>
 <h2 id="opening-the-file"><span class="header-section-number">3.1</span> Opening the file</h2>
-<p><code>1.InsectSoup/Img0920+LG+C2.tif</code> - an insect soup image of Diptera - true flies</p>
+<p><code>1.InsectSoup/Img0920+LG+C2.jpg</code> - an insect soup image of Diptera - true flies</p>
 <ul>
 <li>from Australia, courtesy of the Australian Museum.</li>
 </ul>
@@ -259,7 +262,7 @@
 <p>Open <code>2.Metadata\Scopelodes_spp_Lim_14.inselect</code></p>
 <ul>
 <li>This is a SatScan image of pinned insects - moths in family Limacodidae</li>
-<li>Open the image, segment and refine boxes</li>
+<li>Segment the image and refine bounding boxes</li>
 </ul>
 <p><img src="images/moths_refined.jpg" alt="Moths with bounding boxes" /></p>
 <h2 id="metadata-template-in-inselect"><span class="header-section-number">4.2</span> Metadata template in Inselect</h2>
@@ -372,7 +375,7 @@ b. coordinates of the thumbnail image - <code>ThumbnailLeft</code>, <code>Thumbn
 <ul>
 <li>Open <code>Templates/sialidae.inselect_template</code>
 <ul>
-<li>A higher-resolution thumbnail than previous examples - useful for reading and transcribing labels on slides</li>
+<li>Specifies a higher-resolution thumbnail than used in previous examples - useful for reading and transcribing labels on slides</li>
 <li>Exported crops are saved to <code>TIFF</code> files</li>
 <li>More complex metadata validation</li>
 </ul></li>
@@ -627,12 +630,16 @@ optional arguments:
 <li>One of the image files has a deliberate error - how did the <code>ingest</code> tool behave?</li>
 </ul>
 <h2 id="roundup"><span class="header-section-number">7.4</span> Roundup</h2>
-<p><a href="https://github.com/NaturalHistoryMuseum/inselect" class="uri">https://github.com/NaturalHistoryMuseum/inselect</a> Contact me at <script type="text/javascript">
+<ul>
+<li>Inselect home page: <a href="https://github.com/NaturalHistoryMuseum/inselect" class="uri">https://github.com/NaturalHistoryMuseum/inselect</a></li>
+<li>Contact me at <script type="text/javascript">
 <!--
 h='&#110;&#104;&#x6d;&#46;&#x61;&#x63;&#46;&#x75;&#x6b;';a='&#64;';n='&#108;&#46;&#104;&#x75;&#100;&#x73;&#x6f;&#110;';e=n+a+h;
 document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
 // -->
-</script><noscript>&#108;&#46;&#104;&#x75;&#100;&#x73;&#x6f;&#110;&#32;&#x61;&#116;&#32;&#110;&#104;&#x6d;&#32;&#100;&#x6f;&#116;&#32;&#x61;&#x63;&#32;&#100;&#x6f;&#116;&#32;&#x75;&#x6b;</noscript>.</p>
+</script><noscript>&#108;&#46;&#104;&#x75;&#100;&#x73;&#x6f;&#110;&#32;&#x61;&#116;&#32;&#110;&#104;&#x6d;&#32;&#100;&#x6f;&#116;&#32;&#x61;&#x63;&#32;&#100;&#x6f;&#116;&#32;&#x75;&#x6b;</noscript></li>
+<li>Do you have an idea for this software or would you like to report a problem? Raise an issue at <a href="https://github.com/NaturalHistoryMuseum/inselect/issues" class="uri">https://github.com/NaturalHistoryMuseum/inselect/issues</a></li>
+</ul>
 <img alt="Logos" src="images/logos.png" style="width: 100%"/>
 </body>
 </html>
