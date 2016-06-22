@@ -52,13 +52,15 @@ Inslect has received support from
     2. Windows users should download one of the `.msi` files - `amd64` if using
     64-bit Windows, `win32` if using 32-bit Windows
 2. If you do not already have one, download and install a good text editor.
-Some good options are
-    1. Notepad++ - free and popular (https://notepad-plus-plus.org/ Windows only)
-    2. SublimeText can be used for free but nags you to buy it (https://www.sublimetext.com/ Mac and Windows)
-3. Download a zip file of files from **TODO URL**
-    1. Extract the zip file to a location that you can find easily, such as
+Two options that we use
+    1. SublimeText - an oustandingly good editor - can be used for free but nags you to buy it (https://www.sublimetext.com/ Mac and Windows)
+    2. Notepad++ - free and popular (https://notepad-plus-plus.org/ Windows only)
+3. Download [InselectWorkshopFiles.zip](https://www.dropbox.com/s/zc98qczp658nt8j/InselectWorkshopFiles.zip)
+    1. This contains the images and other files that will be used during this
+    workshop
+    2. Extract the zip file to a location that you can find easily, such as
     your desktop
-    2. These files will be used for the first half of the workshop - in the
+    3. These files will be used for the first half of the workshop - in the
     second half we will apply Inselect to your own digitisation activities so
     please bring some of your own images together with any related information
     such as details of metadata that you wish to capture
