@@ -265,7 +265,7 @@
 <h2 id="metadata-template-in-inselect"><span class="header-section-number">4.2</span> Metadata template in Inselect</h2>
 <p>You have complete control over metadata fields and validation through <code>.inselect_template</code> files, which are simple text files that you can edit using any good text editor.</p>
 <ul>
-<li>Load the <code>limacodidae.inselect_template</code> template by clicking on the <code>Simple Darwin Core</code> button and clicking <code>Choose...</code></li>
+<li>Load the <code>Templates/limacodidae.inselect_template</code> template by clicking on the <code>Simple Darwin Core</code> button and clicking <code>Choose...</code></li>
 <li>Pink shading over the bounding boxes indicates one or more validation problems, so we can see at a glance any boxes that need our attention</li>
 <li>The template specifies that the <code>Location</code> and <code>Taxonomy</code> fields are both mandatory - newly created bounding boxes have no metadata, so all of the bounding boxes are shaded pink to indicate a validation probem</li>
 </ul>
@@ -370,9 +370,9 @@ b. coordinates of the thumbnail image - <code>ThumbnailLeft</code>, <code>Thumbn
 </ul>
 <h2 id="preamble-1"><span class="header-section-number">5.1</span>  Preamble</h2>
 <ul>
-<li>Open <code>3.Barcodes/sialidae.inselect.template</code>
+<li>Open <code>Templates/sialidae.inselect_template</code>
 <ul>
-<li>A higher-resolution thumbnail - useful for reading and transcribing labels on slides</li>
+<li>A higher-resolution thumbnail than previous examples - useful for reading and transcribing labels on slides</li>
 <li>Exported crops are saved to <code>TIFF</code> files</li>
 <li>More complex metadata validation</li>
 </ul></li>
@@ -395,7 +395,7 @@ b. coordinates of the thumbnail image - <code>ThumbnailLeft</code>, <code>Thumbn
 <p>Once refined, you should have 95 bounding boxes:</p>
 <p><img src="images/slides_refined.jpg" alt="Microscope slides" /></p>
 <h2 id="metadata-template"><span class="header-section-number">5.3</span> Metadata template</h2>
-<p>Open <code>3.Barcodes/sialidae.inselect.template</code> in your text editor</p>
+<p>Open <code>Templates/sialidae.inselect_template</code> in your text editor</p>
 <ul>
 <li><p>The 'catalogNumber' field contains <code>Regex parser: '^[0-9]{9}$'</code></p></li>
 <li>This is a regular expression that specifies the field should contain exactly nine digits with no letters or punctuation</li>
