@@ -82,8 +82,8 @@ million individual insects
 * Manually cropping each image takes too much time and without unique
 identifiers the individual images are of questionable value
 
-**The challenge is to efficiently get a single image of each object along with
-its associated metadata.**
+**The challenge is to efficiently get a single image of each object along
+with its associated metadata**
 
 ## How Inselect can help
 Inselect aims to solve some of the problems associated with whole-drawer imaging
@@ -165,15 +165,12 @@ image handling and bounding boxes
 `1.InsectSoup/Img0920+LG+C2.tif` - an insect soup image of Diptera - true flies
 - from Australia, courtesy of the Australian Museum.
 
-1. Use the open file using one of
-    * File, Open;
-    * `CTRL + O` or
-    * Open button on toolbar
-    * Drag-and-drop; at the time of writing, this doesn't work on Mac - we
-    will fix this in a future release
-
-The `TIFF` image is just under 300 MB; some images can be as large as 800MB.
-It takes several seconds to read files this large.
+Use the open file using one of
+* File, Open;
+* `CTRL + O` or
+* Open button on toolbar
+* Drag-and-drop; at the time of writing, this doesn't work on Mac - we
+will fix this in a future release
 
 ![Insect soup](images/soup.jpg)
 
@@ -188,7 +185,8 @@ Inselect has created two files
 2. `Img0920+LG+C2_thumbnail.jpg`
 
     * Creating the thumbnail `JPG` is a once-only operation
-    * The thumbnail `JPG` is very quick to read - far quicker than the `TIFF`
+    * The thumbnail `JPG` is very quick to read - far quicker than the large
+    high-resolution `TIFF` files that are typically used in digitisation programmes
     * Inselect therefore loads and shows the thumbnail whenever the document is opened
     * Inselect loads the original full resolution image only as required - when
     saving crops or reading barcodes
@@ -275,15 +273,16 @@ Inselect marks each point with a crosshair
 
 ![Flies with overlapping wings](images/soup_subsegment.jpg)
 
-* Run the 'Subsegment box', either from the toolbar or with `F6`
+Run the 'Subsegment box', either from the toolbar or with `F6`
 
 ![Subsegmented flies](images/soup_subsegmented.jpg)
 
-![Insect soup with fully refined bounding boxes](images/soup_refined.jpg)
-
 ## Export crops
 
-Click on 'Save crops' in the 'Export' section of the toolbar.
+Once you are happy with the bounding boxes, click on 'Save crops' in the
+'Export' section of the toolbar.
+
+![Insect soup with fully refined bounding boxes](images/soup_refined.jpg)
 
 * Inselect loads the original full-resolution image
 * It applies bounding boxes to the original full-resolution image and crops
