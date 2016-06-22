@@ -153,10 +153,10 @@ Objective: to place a bounding box around each object in an image and export
 each image crop to its own `JPG` file.
 
 This example will cover
-* Inselect's image and file handling;
-* how to create and edit bounding boxes;
-* how to automatically segment images and
-* how to subsegment boxes round overlapping objects.
+* Inselect's image and file handling
+* How to create and edit bounding boxes
+* How to automatically segment images
+* How to subsegment boxes round overlapping objects
 
 image handling and bounding boxes
 
@@ -195,31 +195,31 @@ Inselect has created two files
 
 On the 'Boxes' view you can zoom in and out by
 
-* holding down `CTRL` and spinning the mouse wheel up or down
-* (on a Mac) holding down `⌘` and swiping up or down with two fingers on trackpad
-* holding down `CTRL` and pressing the `+` or `-` keys
-* clicking the toolbar buttons
+* Holding down `CTRL` and spinning the mouse wheel up or down
+* On a Mac, holding down `⌘` and swiping up or down with two fingers on trackpad
+* Holding down `CTRL` and pressing the `+` or `-` keys
+* Clicking the toolbar buttons
 
 You can pan around the image by
-* using the scrollbars
-* (on a Mac) by swiping with two fingers on trackpad
+* Using the scrollbars
+* On a Mac, by swiping with two fingers on trackpad
 
 ## Creating and edited bounding boxes
 
 You can create boxes with
-* mouse right-click and drag
-* (on a Mac) click the trackpad using two fingers
+* Mouse right-click and drag
+* On a Mac, click the trackpad using two fingers
 
 You can select boxes
 * Mouse drag
-* Click on boxes
-* `CTRL + mouse click` to toggle
+* Click on a box
+* `CTRL + mouse click` to toggle a box
 * Select all with `CTRL + A`
 * Select none with `CTRL + D`
 
 You can move selected boxes using
-* mouse drag and drop
-* the arrow keys
+* Mouse drag and drop
+* The arrow keys
 
 ## Segmenting
 
@@ -257,8 +257,8 @@ algorithm. We will also create any bounding boxes that are missing.
 
 ## Adjust borders of bounding boxes where they are too big or too small
 You can adjust boxes using
-* the mouse resize handles
-* keyboard arrow keys
+* The mouse resize handles
+* Keyboard arrow keys
     * `SHIFT +` arrow keys moves the bottom right of the box
     * `ALT +` arrow keys moves the top left of the box
 
@@ -296,9 +296,9 @@ format - this will be covered later
 Objective: to configure and use Inselect metadata templates.
 
 This example will cover
-* how inselect treats metadata and validation;
-* Inselect's metadata template format and
-* how to export crops and `CSV` files.
+* How inselect treats metadata and validation
+* Inselect's metadata template format
+* How to export crops and `CSV` files
 
 ## Preamble
 
@@ -314,7 +314,7 @@ You have complete control over metadata fields and validation through
 `.inselect_template` files, which are simple text files that you can edit
 using any good text editor.
 
-* Load the `limacodidae.inselect_template` template by clicking on the
+* Load the `Templates/limacodidae.inselect_template` template by clicking on the
 `Simple Darwin Core` button and clicking `Choose...`
 * Pink shading over the bounding boxes indicates one or more validation problems,
 so we can see at a glance any boxes that need our attention
@@ -449,9 +449,9 @@ This example will cover
 
 ## Preamble
 
-* Open `3.Barcodes/sialidae.inselect.template`
-    * A higher-resolution thumbnail - useful for reading and
-    transcribing labels on slides
+* Open `Templates/sialidae.inselect_template`
+    * A higher-resolution thumbnail than previous examples - useful for reading
+    and transcribing labels on slides
     * Exported crops are saved to `TIFF` files
     * More complex metadata validation
 * Load `3.Barcodes/Drawer_40b_w45a_45b_46_47a.inselect`
@@ -479,7 +479,7 @@ Once refined, you should have 95 bounding boxes:
 
 ## Metadata template
 
-Open `3.Barcodes/sialidae.inselect.template` in your text editor
+Open `Templates/sialidae.inselect_template` in your text editor
 
 * The 'catalogNumber' field contains `Regex parser: '^[0-9]{9}$'`
 
