@@ -34,6 +34,7 @@ This workshop will cover
 
 ## Acknowledgements
 
+* Conception: Ben Price
 * Prototype and segmentation algorithm: Pieter Holtzhausen and Stéfan van der Walt
 * Project oversight: Laurence Livermore, Vladimir Blagoderov and Vincent Smith
 * Application development: Alice Heaton and Lawrence Hudson
