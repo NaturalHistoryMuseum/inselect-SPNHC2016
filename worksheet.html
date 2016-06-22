@@ -91,7 +91,7 @@
 <li>By themselves, drawer-level images aren't very useful</li>
 <li>Manually cropping each image takes too much time and without unique identifiers the individual images are of questionable value</li>
 </ul>
-<p><strong>The challenge is to efficiently get a single image of each object along with its associated metadata.</strong></p>
+<p><strong>The challenge is to efficiently get a single image of each object along with its associated metadata</strong></p>
 <h2 id="how-inselect-can-help"><span class="header-section-number">1.6</span> How Inselect can help</h2>
 <p>Inselect aims to solve some of the problems associated with whole-drawer imaging</p>
 <ul>
@@ -142,16 +142,13 @@
 <ul>
 <li>from Australia, courtesy of the Australian Museum.</li>
 </ul>
-<ol>
-<li>Use the open file using one of
+<p>Use the open file using one of</p>
 <ul>
 <li>File, Open;</li>
 <li><code>CTRL + O</code> or</li>
 <li>Open button on toolbar</li>
 <li>Drag-and-drop; at the time of writing, this doesn't work on Mac - we will fix this in a future release</li>
-</ul></li>
-</ol>
-<p>The <code>TIFF</code> image is just under 300 MB; some images can be as large as 800MB. It takes several seconds to read files this large.</p>
+</ul>
 <p><img src="images/soup.jpg" alt="Insect soup" /></p>
 <h2 id="created-files"><span class="header-section-number">3.2</span> Created files</h2>
 <p>Inselect has created two files</p>
@@ -161,7 +158,7 @@
 <li><p><code>Img0920+LG+C2_thumbnail.jpg</code></p>
 <ul>
 <li>Creating the thumbnail <code>JPG</code> is a once-only operation</li>
-<li>The thumbnail <code>JPG</code> is very quick to read - far quicker than the <code>TIFF</code></li>
+<li>The thumbnail <code>JPG</code> is very quick to read - far quicker than the large high-resolution <code>TIFF</code> files that are typically used in digitisation programmes</li>
 <li>Inselect therefore loads and shows the thumbnail whenever the document is opened</li>
 <li>Inselect loads the original full resolution image only as required - when saving crops or reading barcodes</li>
 </ul></li>
@@ -239,13 +236,11 @@
 <li>You can remove crosshair by unselecting the box</li>
 </ul>
 <p><img src="images/soup_subsegment.jpg" alt="Flies with overlapping wings" /></p>
-<ul>
-<li>Run the 'Subsegment box', either from the toolbar or with <code>F6</code></li>
-</ul>
+<p>Run the 'Subsegment box', either from the toolbar or with <code>F6</code></p>
 <p><img src="images/soup_subsegmented.jpg" alt="Subsegmented flies" /></p>
-<p><img src="images/soup_refined.jpg" alt="Insect soup with fully refined bounding boxes" /></p>
 <h2 id="export-crops"><span class="header-section-number">3.10</span> Export crops</h2>
-<p>Click on 'Save crops' in the 'Export' section of the toolbar.</p>
+<p>Once you are happy with the bounding boxes, click on 'Save crops' in the 'Export' section of the toolbar.</p>
+<p><img src="images/soup_refined.jpg" alt="Insect soup with fully refined bounding boxes" /></p>
 <ul>
 <li>Inselect loads the original full-resolution image</li>
 <li>It applies bounding boxes to the original full-resolution image and crops each box</li>
