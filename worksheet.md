@@ -49,25 +49,25 @@ Inslect has received support from
 
 1. Download and run the appropriate installer for the latest release of Inselect
 (at time of writing, v0.1.33) from the [releases tab](https://github.com/NaturalHistoryMuseum/inselect/releases)
-    1. Mac users should download the `.dmg` file
-    2. Windows users should download one of the `.msi` files - `amd64` if using
+    * Mac users should download the `.dmg` file
+    * Windows users should download one of the `.msi` files - `amd64` if using
     64-bit Windows, `win32` if using 32-bit Windows
 2. If you do not already have one, download and install a good text editor.
 Two options that we use
-    1. SublimeText - an oustandingly good editor - can be used for free but nags you to buy it (https://www.sublimetext.com/ Mac and Windows)
-    2. Notepad++ - free and popular (https://notepad-plus-plus.org/ Windows only)
+    * SublimeText - an oustandingly good editor - can be used for free but nags you to buy it (https://www.sublimetext.com/ Mac and Windows)
+    * Notepad++ - free and popular (https://notepad-plus-plus.org/ Windows only)
 3. Download [InselectWorkshopFiles.zip](https://www.dropbox.com/s/zc98qczp658nt8j/InselectWorkshopFiles.zip)
-    1. This contains the images and other files that will be used during this
+    * This contains the images and other files that will be used during this
     workshop
-    2. Extract the zip file to a location that you can find easily, such as
+    * Extract the zip file to a location that you can find easily, such as
     your desktop
-    3. These files will be used for the first half of the workshop - in the
+    * These files will be used for the first half of the workshop - in the
     second half we will apply Inselect to your own digitisation activities so
     please bring some of your own images together with any related information
     such as details of metadata that you wish to capture
 4. Optional background reading and viewing:
-    1. Webinar: [Insights into Inselect Software: automating image processing, barcode reading, and validation of user-defined metadata](https://www.idigbio.org/content/insights-inselect-software-automating-image-processing-barcode-reading-and-validation-user)
-    2. [PLOS ONE paper on Inselect](https://dx.doi.org/10.1371/journal.pone.0143402)
+    * Webinar: [Insights into Inselect Software: automating image processing, barcode reading, and validation of user-defined metadata](https://www.idigbio.org/content/insights-inselect-software-automating-image-processing-barcode-reading-and-validation-user)
+    * [PLOS ONE paper on Inselect](https://dx.doi.org/10.1371/journal.pone.0143402)
 
 ## The problem
 Natural history collections are vast and varied, providing quite a few challenges
